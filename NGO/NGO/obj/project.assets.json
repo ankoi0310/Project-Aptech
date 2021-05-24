@@ -8,24 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\DELL\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\quock\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\APTECH\\RESTful-API\\Project-Aptech\\NGO\\NGO\\NGO.csproj",
+      "projectUniqueName": "C:\\Users\\quock\\OneDrive\\Documents\\GitHub\\Project-Aptech\\NGO\\NGO\\NGO.csproj",
       "projectName": "NGO",
-      "projectPath": "F:\\APTECH\\RESTful-API\\Project-Aptech\\NGO\\NGO\\NGO.csproj",
-      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "F:\\APTECH\\RESTful-API\\Project-Aptech\\NGO\\NGO\\obj\\",
+      "projectPath": "C:\\Users\\quock\\OneDrive\\Documents\\GitHub\\Project-Aptech\\NGO\\NGO\\NGO.csproj",
+      "packagesPath": "C:\\Users\\quock\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\quock\\OneDrive\\Documents\\GitHub\\Project-Aptech\\NGO\\NGO\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\quock\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
