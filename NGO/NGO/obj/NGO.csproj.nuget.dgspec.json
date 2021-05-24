@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\quock\\OneDrive\\Documents\\GitHub\\Project-Aptech\\NGO\\Website\\Website.csproj": {}
+    "C:\\Users\\quock\\OneDrive\\Documents\\GitHub\\Project-Aptech\\NGO\\NGO\\NGO.csproj": {}
   },
   "projects": {
-    "C:\\Users\\quock\\OneDrive\\Documents\\GitHub\\Project-Aptech\\NGO\\Website\\Website.csproj": {
+    "C:\\Users\\quock\\OneDrive\\Documents\\GitHub\\Project-Aptech\\NGO\\NGO\\NGO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\quock\\OneDrive\\Documents\\GitHub\\Project-Aptech\\NGO\\Website\\Website.csproj",
-        "projectName": "Website",
-        "projectPath": "C:\\Users\\quock\\OneDrive\\Documents\\GitHub\\Project-Aptech\\NGO\\Website\\Website.csproj",
+        "projectUniqueName": "C:\\Users\\quock\\OneDrive\\Documents\\GitHub\\Project-Aptech\\NGO\\NGO\\NGO.csproj",
+        "projectName": "NGO",
+        "projectPath": "C:\\Users\\quock\\OneDrive\\Documents\\GitHub\\Project-Aptech\\NGO\\NGO\\NGO.csproj",
         "packagesPath": "C:\\Users\\quock\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\quock\\OneDrive\\Documents\\GitHub\\Project-Aptech\\NGO\\Website\\obj\\",
+        "outputPath": "C:\\Users\\quock\\OneDrive\\Documents\\GitHub\\Project-Aptech\\NGO\\NGO\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\quock\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,12 +39,6 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "dependencies": {
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[5.6.3, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
