@@ -17,7 +17,7 @@ namespace NGO.Models
         public DbSet<Member> Member { get; set; }
         public DbSet<MemberType> MemberTypes { get; set; }
         public DbSet<Partner> Partners { get; set; }
-        public DbSet<Models.MappingClass.Program> Programs { get; set; }
+        public DbSet<Program> Programs { get; set; }
         public DbSet<Status> Status { get; set; }
         public DbSet<Query> Queries { get; set; }
         public DbSet<ProgramImage> ProgramImages { get; set; }
