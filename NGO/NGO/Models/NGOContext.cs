@@ -14,6 +14,12 @@ namespace NGO.Models
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Program>(e => e.HasNoKey());
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Member> Member { get; set; }
         public DbSet<MemberType> MemberTypes { get; set; }
         public DbSet<Partner> Partners { get; set; }

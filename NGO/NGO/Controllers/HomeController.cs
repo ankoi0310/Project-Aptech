@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NGO.Models;
 using System;
@@ -13,18 +12,17 @@ namespace NGO.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly NGOContext context;
+        private readonly NGOContext _context;
 
         public HomeController(ILogger<HomeController> logger, NGOContext context)
         {
             _logger = logger;
-            this.context = context;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            //test
-            var q = context.MemberTypes.ToList();
+            _context.Member.ToList();
             return View();
         }
 

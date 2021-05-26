@@ -25,7 +25,7 @@ namespace NGO
         {
             services.AddMvc();
             services.AddControllersWithViews();
-            string connStr = Configuration.GetConnectionString("DefaultConnect");
+            string connStr = Configuration.GetConnectionString("MyConnection");
             services.AddDbContext<Models.NGOContext>(config =>
             {
                 config.UseSqlServer(connStr, option => option.EnableRetryOnFailure());
