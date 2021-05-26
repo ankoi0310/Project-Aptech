@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@{ Html.RenderPartial("~/Views/LayoutAdmin/_Partial_admin_header.cshtml"); }
+<body>
+    <script src="../assets/js/preloader.js"></script>
+    <div class="body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        @{ Html.RenderPartial("~/Views/LayoutAdmin/_Partial_Admin_sidebar.cshtml"); }
+        <!-- partial -->
+        <div class="main-wrapper mdc-drawer-app-content">
+            <!-- partial:../../partials/_navbar.html -->
+            @{ Html.RenderPartial("~/Views/LayoutAdmin/_Partial_Admin_Navbar.cshtml");}
+            <!-- partial -->
+            <div class="page-wrapper mdc-toolbar-fixed-adjust">
+                <main class="content-wrapper">
+                    @RenderBody()
+                </main>
+                <!-- partial:../../partials/_footer.html -->
+                @{Html.RenderPartial("~/Views/LayoutAdmin/_Partial_Admin_Footer.cshtml"); }
+                <!-- partial -->
+            </div>
+        </div>
+    </div>
+    <script src="~/assetsAdmin/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/assetsAdmin/js/material.js"></script>
+    <script src="~/assetsAdmin/js/misc.js"></script>
+</body>
+</html>
+

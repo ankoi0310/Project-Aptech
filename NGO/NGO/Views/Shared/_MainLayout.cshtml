@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="">
+@{         
+    Html.RenderPartial("_HeadPartial");
+}
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Add your site or application content here -->
+
+
+    <header>
+        @{ Html.RenderPartial("_HeaderPartial"); }
+    </header>
+
+
+    @{ Html.RenderPartial("_MainsliderPartial"); }
+
+    @{ Html.RenderPartial("_UpcomingEventPartial"); }
+
+    @{ Html.RenderPartial("_RecentCausePartial"); }
+
+    @{ Html.RenderPartial("_OrganizationPartial"); }
+
+    @{ Html.RenderPartial("_OngoingProjectPartial"); }
+
+    @{ Html.RenderPartial("_StaffPartial"); }
+
+    @{ Html.RenderPartial("_OurhelpPartial"); }
+
+    @{ Html.RenderPartial("_ClientPartial"); }
+<div>
+    @RenderBody()
+</div>
+<footer>
+    @{ Html.RenderPartial("_FooterPartial"); }
+</footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/owl.carousel.js"></script>
+    <script src="~/assets/js/jquery.countdown.min.js"></script>
+    <script src="~/assets/js/jquery.mixitup.js"></script>
+    <script src="~/assets/js/Chart.min.js"></script>
+    <script src="~/assets/js/custom-chart.js"></script>
+    <script src="~/assets/js/main.js"></script>
+</body>
+</html>
