@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,7 +23,13 @@ namespace NGO
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddControllersWithViews();
+            string connStr = Configuration.GetConnectionString("DefaultConnect");
+            services.AddDbContext<Models.NGOContext>(config =>
+            {
+                config.UseSqlServer(connStr, option => option.EnableRetryOnFailure());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
