@@ -1,8 +1,21 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-@{ Html.RenderPartial("~/Views/LayoutAdmin/_Partial_admin_header.cshtml"); }
+@{Html.RenderPartial("~/Views/LayoutAdmin/_Partial_admin_header.cshtml"); }
 <body>
-    <script src="../assets/js/preloader.js"></script>
+    <style>
+        th, td {
+            vertical-align: middle !important;
+        }
+
+            th, td:last-child {
+                text-align: center;
+            }
+
+                th:last-child {
+                    width: 180px;
+                }
+    </style>
+    <script src="~/assetsAdmin/js/preloader.js"></script>
     <div class="body-wrapper">
         <!-- partial:../../partials/_sidebar.html -->
         @{ Html.RenderPartial("~/Views/LayoutAdmin/_Partial_Admin_sidebar.cshtml"); }
@@ -14,6 +27,19 @@
             <div class="page-wrapper mdc-toolbar-fixed-adjust">
                 <main class="content-wrapper">
                     @RenderBody()
+
+                    <div class="modal" tabindex="-1" id="form-modal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title"></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </main>
                 <!-- partial:../../partials/_footer.html -->
                 @{Html.RenderPartial("~/Views/LayoutAdmin/_Partial_Admin_Footer.cshtml"); }
@@ -24,6 +50,30 @@
     <script src="~/assetsAdmin/vendors/js/vendor.bundle.base.js"></script>
     <script src="~/assetsAdmin/js/material.js"></script>
     <script src="~/assetsAdmin/js/misc.js"></script>
+    <!-- -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<script src="~/js/notify.min.js" asp-append-version="true"></script>*@
+    <!-- DataTables -->
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+            });
+            removeSorting();
+            $('th:last-child').click(() => {
+                removeSorting();
+            })
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
 
