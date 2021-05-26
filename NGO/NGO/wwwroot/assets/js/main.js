@@ -8,9 +8,6 @@ $(document).ready(function(){
         pagination: false
     });
 
-
-
-
 	$('#clock').countdown('2015/12/29', function(event) {
 	   var $this = $(this).html(event.strftime(''
 	    
