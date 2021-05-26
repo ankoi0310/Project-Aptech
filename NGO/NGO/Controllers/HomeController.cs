@@ -22,7 +22,6 @@ namespace NGO.Controllers
 
         public IActionResult Index()
         {
-            _context.Member.ToList();
             return View();
         }
 
