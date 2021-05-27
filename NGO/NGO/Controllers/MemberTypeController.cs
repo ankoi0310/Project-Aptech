@@ -15,7 +15,7 @@ namespace NGO.Controllers
 
         public MemberTypeController()
         {
-            _context = _context == null ? new NGOContext() : _context;
+            _context ??= new NGOContext();
         }
 
         public IActionResult Index()
@@ -60,7 +60,6 @@ namespace NGO.Controllers
             {
                 if (id == 0)
                 {
-                    memberType.Active = true;
                     _context.Add(memberType);
                     await _context.SaveChangesAsync();
                 }
