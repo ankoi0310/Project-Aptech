@@ -1,1 +1,14 @@
 ﻿
+th, td {
+    vertical-align: middle !important;
+}
+
+    th, td:last-child {
+        text-align: center;
+    }
+
+        th:last-child {
+            text-align: center;
+            padding: 0;
+            width: 180px;
+        }

@@ -14,10 +14,10 @@ namespace NGO.Models.MappingClass
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("Id", TypeName = "int")]
         public int Id { get; set; }
+
         [Column("Name", TypeName = "nvarchar(50)")]
         public string Name { get; set; }
-        [Column("Role", TypeName = "nvarchar(50)")]
-        public string Role { get; set; }
+
         [Column("Active", TypeName = "bit")]
         public bool Active { get; set; }
 

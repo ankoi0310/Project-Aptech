@@ -23,8 +23,8 @@ namespace NGO.Models.MappingClass
         public string ContentQuery { get; set; }
 
         [Column("ReplyTo", TypeName = "int")]
-        public int ReplyTo { get; set; }
-        [ForeignKey("ReplyTo")]
+        public int? ReplyTo { get; set; }
+        [ForeignKey("Id")]
         public Query UpperQuery { get; set; }
 
         List<Query> LowerQueries { get; set; }

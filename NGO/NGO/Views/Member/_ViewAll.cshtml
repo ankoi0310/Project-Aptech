@@ -42,8 +42,8 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Active)
                     </th>
-                    <th>
-                        <a onclick="showInPopup('@Url.Action("AddOrEdit", "Member", null, Context.Request.Scheme)', 'New Member')" class="btn btn-success text-white"><i class="fas fa-plus"></i>&ensp;New Member</a>
+                    <th class="text-center">
+                        <a onclick="showInPopup('@Url.Action("AddOrEdit", "Member", null, Context.Request.Scheme)', 'New Member')" class="btn btn-success text-white"><i class="fas fa-plus"></i>&ensp;New</a>
                     </th>
                 </tr>
             </thead>

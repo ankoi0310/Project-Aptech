@@ -1,0 +1,12 @@
+﻿@model IEnumerable<NGO.Models.MappingClass.DonationCategory>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/LayoutAdmin/_AdminLayout.cshtml";
+}
+
+<h1 class="text-center"><i class="fas fa-user"></i>&ensp;Donation Category</h1>
+
+<div id="view-all">
+    @await Html.PartialAsync("_ViewAll", Model)
+</div>

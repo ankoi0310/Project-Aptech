@@ -1,0 +1,12 @@
+﻿@model IEnumerable<NGO.Models.MappingClass.MemberType>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/LayoutAdmin/_AdminLayout.cshtml";
+}
+
+<h1 class="text-center"><i class="fas fa-user"></i>&ensp;Member Type</h1>
+
+<div id="view-all">
+    @await Html.PartialAsync("_ViewAll", Model)
+</div>
