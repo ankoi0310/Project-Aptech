@@ -32,15 +32,19 @@ namespace NGO.Controllers
                 if (member != null)
                 {
                     HttpContext.Session.SetString("MEMBER", JsonConvert.SerializeObject(member));
+                    if (Tools.GetMemberType(member.MemberTypeId).Contains("Admin"))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
                     return RedirectToAction("Index", "Main");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Fail to login");
+                    ViewBag.MEMBER = null;
                 }
             }
 
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "Login", ViewBag.MEMBER = null);
         }
 
         public IActionResult Logout()
