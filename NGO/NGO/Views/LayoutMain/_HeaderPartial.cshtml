@@ -1,9 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-<!-- day la phan menu o tren dau trang-->
+﻿<!-- day la phan menu o tren dau trang-->
 <div class="nivo-header-style-one fixed-top">
     <div class="header-wrap">
         <div class="container">
@@ -169,6 +164,40 @@
                             </div>
                         </div>
                     </div>
+                    <style>
+                        #user {
+                            margin-right: 10px
+                        }
+
+                        #login, #logout {
+                            font-size: 15px;
+                            font-weight: 600;
+                            border-radius: 10px;
+                            color: #0094ff;
+                            padding: 4px 25px;
+                            margin: 0 auto 0 0;
+                            border: 2px solid #0094ff;
+                            transition: all 0.5s;
+                        }
+
+                            #login:hover, #logout:hover {
+                                padding: 4px 25px;
+                                color: azure;
+                                background: #1123B7;
+                                border: 2px solid #1123B7;
+                            }
+                    </style>
+                    @if (ViewBag.MEMBER != null)
+                    {
+                        <ul id="user" class="list-group">
+                            <li class="list-group-item list-group-item-primary">Hello, @ViewBag.MEMBER.Name</li>
+                        </ul>
+                        <a href="~/login/logout" id="logout">Logout &nbsp;<i class="fa fa-sign-out"></i></a>
+                    }
+                    else
+                    {
+                        <a href="~/login" id="login">Login &nbsp;<i class="fa fa-sign-in"></i></a>
+                    }
                 </nav>
             </div>
         </div>

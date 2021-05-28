@@ -8,7 +8,7 @@
         <div class="mdc-list-group">
             <nav class="mdc-list mdc-drawer-menu">
                 <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="../../index.html">
+                    <a class="mdc-drawer-link" href="~/main">
                         <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">home</i>
                         Admin
                     </a>
@@ -49,12 +49,24 @@
                         Query
                     </a>
                 </div>
+                <div class="mdc-list-item mdc-drawer-item ">
+                    <a class="mdc-expansion-panel-link" href="~/partner/list" data-toggle="expansionPanel" data-target="sample-page-submenu">
+                        <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">people</i>
+                        Partner
+                    </a>
+                </div>
+                <div class="mdc-list-item mdc-drawer-item ">
+                    <a class="mdc-expansion-panel-link" href="~/query/list" data-toggle="expansionPanel" data-target="sample-page-submenu">
+                        <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">payment</i>
+                        Payment Type
+                    </a>
+                </div>
             </nav>
         </div>
         <div class="profile-actions">
             <a href="javascript:;">Settings</a>
             <span class="divider"></span>
-            <a href="javascript:;">Logout</a>
+            <a href="~/login/logout">Logout</a>
         </div>
         
     </div>

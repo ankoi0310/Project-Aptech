@@ -1,4 +1,14 @@
-﻿<!doctype html>
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+
+@{
+    if (Context.Session.GetString("MEMBER") != null)
+    {
+        ViewBag.MEMBER = JsonConvert.DeserializeObject(Context.Session.GetString("MEMBER"));
+    }
+}
+
+<!doctype html>
 <html lang="zxx">
 
 <!-- Mirrored from templates.envytheme.com/nivo/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 May 2021 01:31:00 GMT -->
@@ -33,30 +43,21 @@
 
     <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="~/assets/js/jquery.min.js"></script>
-
     <script src="~/assets/js/bootstrap.bundle.min.js"></script>
-
     <script src="~/assets/js/meanmenu.min.js"></script>
-
     <script src="~/assets/js/wow.min.js"></script>
-
     <script src="~/assets/js/owl.carousel.min.js"></script>
-
     <script src="~/assets/js/imagelightbox.min.js"></script>
-
     <script src="~/assets/js/appear.min.js"></script>
-
     <script src="~/assets/js/odometer.min.js"></script>
-
     <script src="~/assets/js/mixitup.min.js"></script>
-
     <script src="~/assets/js/form-validator.min.js"></script>
-
     <script src="~/assets/js/contact-form-script.js"></script>
-
     <script src="~/assets/js/ajaxchimp.min.js"></script>
-
     <script src="~/assets/js/custom.js"></script>
+    <script src="~/js/notify.min.js"></script>
+    <script src="~/js/site.js"></script>
+
 </body>
 
 <!-- Mirrored from templates.envytheme.com/nivo/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 May 2021 01:31:18 GMT -->
