@@ -1,0 +1,134 @@
+﻿@model NGO.Models.MappingClass.Program
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = null;
+    var now = DateTime.Now;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id="@Model.Id" onsubmit="return jQueryAjaxPost(this)" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" value="@Model.Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BeginDate" class="control-label"></label>
+                @if (Model.Id == 0)
+                {
+                    <input asp-for="BeginDate" type="date" class="form-control" placeholder="dd/MM/yyyy" value="@now.ToShortDateString()" />
+                }
+                else
+                {
+                    <input asp-for="BeginDate" type="date" class="form-control" placeholder="dd/MM/yyyy" />
+                }
+                <span asp-validation-for="BeginDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                @if (Model.Id == 0)
+                {
+                    <input asp-for="EndDate" type="date" class="form-control" placeholder="dd/MM/yyyy" value="@now.ToShortDateString()" />
+                }
+                else
+                {
+                    <input asp-for="EndDate" type="date" class="form-control" placeholder="dd/MM/yyyy" />
+                }
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Information" class="control-label"></label>
+                <input asp-for="Information" class="form-control" />
+                <span asp-validation-for="Information" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DonationLink" class="control-label"></label>
+                <input asp-for="DonationLink" class="form-control" />
+                <span asp-validation-for="DonationLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinDonation" class="control-label"></label>
+                <input asp-for="MinDonation" class="form-control" />
+                <span asp-validation-for="MinDonation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxDonation" class="control-label"></label>
+                <input asp-for="MaxDonation" class="form-control" />
+                <span asp-validation-for="MaxDonation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NeedAmount" class="control-label"></label>
+                <input asp-for="NeedAmount" class="form-control" />
+                <span asp-validation-for="NeedAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatusId" class="control-label"></label>
+                <select class="form-select" aria-label="Default select example" asp-for="StatusId">
+
+                    @if (Model.Id != 0)
+                    {
+                        <option value="@Model.Id" selected>@Model.Status.Name</option>
+                        @foreach (var item in ViewBag.StatusList)
+                        {
+                            if (item.Id == Model.Id)
+                            {
+                                continue;
+                            }
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                    else
+                    {
+                        <option selected>Open this select menu</option>
+                        @foreach (var item in ViewBag.StatusList)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DonationCategoryId" class="control-label"></label>
+                <select class="form-select" aria-label="Default select example" asp-for="DonationCategoryId">
+
+                    @if (Model.Id != 0)
+                    {
+                        <option value="@Model.Id" selected>@Model.DonationCategory.Name</option>
+                        @foreach (var item in ViewBag.DonationCateList)
+                        {
+                            if (item.Id == Model.Id)
+                            {
+                                continue;
+                            }
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                    else
+                    {
+                        <option selected>Open this select menu</option>
+                        @foreach (var item in ViewBag.DonationCateList)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Active" class="control-label"></label>
+                <input asp-for="Active" class="form-control" />
+                <span asp-validation-for="Active" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

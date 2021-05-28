@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,5 +25,11 @@ namespace NGO.Models.MappingClass
         public Program Program { get; set; }
         [Column("Active", TypeName = "bit")]
         public bool Active { get; set; }
+
+
+        [NotMapped]
+        public FormFile SingleFile { get; set; }
+        [NotMapped]
+        public List<FormFile> MultiFiles { get; set;}
     }
 }
