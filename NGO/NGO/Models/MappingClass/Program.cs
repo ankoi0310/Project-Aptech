@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,8 +23,8 @@ namespace NGO.Models.MappingClass
         [Column("EndDate", TypeName = "date")]
         public DateTime EndDate { get; set; }
 
-        [Column("Informations", TypeName = "nvarchar")]
-        public string Informations { get; set; }
+        [Column("Information", TypeName = "nvarchar")]
+        public string Information { get; set; }
         [Column("DonationLink", TypeName = "nvarchar(50)")]
         public string DonationLink { get; set; }
         [Column("MinDonation", TypeName = "int")]
@@ -45,5 +46,7 @@ namespace NGO.Models.MappingClass
 
         [Column("Active", TypeName = "bit")]
         public bool Active { get; set; }
+        [NotMapped]
+        public List<FormFile> MultiFiles { get; set; }
     }
 }
