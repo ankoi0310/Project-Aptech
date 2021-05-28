@@ -1,13 +1,4 @@
-﻿@using Microsoft.AspNetCore.Http
-@using Newtonsoft.Json
-
-@{
-    if (Context.Session.GetString("MEMBER") != null)
-    {
-        ViewBag.MEMBER = JsonConvert.DeserializeObject(Context.Session.GetString("MEMBER"));
-    }
-}
-<!-- day la phan menu o tren dau trang-->
+﻿<!-- day la phan menu o tren dau trang-->
 <div class="nivo-header-style-one fixed-top">
     <div class="header-wrap">
         <div class="container">

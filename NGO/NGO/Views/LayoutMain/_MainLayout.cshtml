@@ -1,4 +1,14 @@
-﻿<!doctype html>
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+
+@{
+    if (Context.Session.GetString("MEMBER") != null)
+    {
+        ViewBag.MEMBER = JsonConvert.DeserializeObject(Context.Session.GetString("MEMBER"));
+    }
+}
+
+<!doctype html>
 <html lang="zxx">
 
 <!-- Mirrored from templates.envytheme.com/nivo/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 May 2021 01:31:00 GMT -->
