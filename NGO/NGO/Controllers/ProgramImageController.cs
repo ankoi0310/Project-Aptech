@@ -17,9 +17,9 @@ namespace NGO.Controllers
         private readonly NGOContext _context;
         private readonly IWebHostEnvironment _webHostEnvironmen;
         static int _ProgramId = 0;
-        public ProgramImageController(NGOContext context, IWebHostEnvironment webHostEnvironmen)
+        public ProgramImageController(IWebHostEnvironment webHostEnvironmen)
         {
-            _context = context;
+            _context ??= new NGOContext();
             _webHostEnvironmen = webHostEnvironmen;
         }
 

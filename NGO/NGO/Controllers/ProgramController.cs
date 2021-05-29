@@ -13,9 +13,9 @@ namespace NGO.Controllers
     {
         private readonly NGOContext _context;
 
-        public ProgramController(NGOContext context)
+        public ProgramController()
         {
-            _context = context;
+            _context ??= new NGOContext();
         }
 
         public IActionResult Index()
