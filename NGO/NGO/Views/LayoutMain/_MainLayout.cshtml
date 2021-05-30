@@ -6,6 +6,18 @@
     {
         ViewBag.MEMBER = JsonConvert.DeserializeObject(Context.Session.GetString("MEMBER"));
     }
+    else
+    {
+        @section scripts {
+            <script>
+                $(function () {
+                    if (confirm(@TempData["confirm"])) {
+                        @{ Context.Response.Redirect("~/login"); }
+                    }
+                })
+            </script>
+        }
+    }
 }
 
 <!doctype html>
