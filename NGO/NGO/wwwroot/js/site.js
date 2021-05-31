@@ -47,6 +47,30 @@ jQueryAjaxPost = (form) => {
 
     return false;
 }
+jQueryAjaxPostForRegister = (form) => {
+    removeSorting();
+    try {
+        $.ajax({
+            type: "POST",
+            url: form.action,
+            data: new FormData(form),
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res.isValid) {
+                    alert("Submitted Succesfully");
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    } catch (e) {
+        console.log(e);
+    }
+
+    return false;
+}
 
 jQueryAjaxDelete = form => {
     removeSorting();
