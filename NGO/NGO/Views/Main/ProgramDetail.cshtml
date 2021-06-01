@@ -23,6 +23,14 @@
     {
         listImage = ViewBag.listImage;
     }
+    List<PaymentType> listPayment = new List<PaymentType>();
+
+    if (ViewBag.listPayment != null)
+    {
+        listPayment = ViewBag.listPayment;
+    }
+    Member member = new Member();
+    member = ViewBag.Member;
     var raised = listDonationRecord.Sum(x => x.Amount);
     var progressRate = (raised / Pro.NeedAmount).ToString("0%"); ;
 }
@@ -73,68 +81,136 @@
                     <div class="article-content causes-details-two">
                         <div class="entry-meta">
                             <ul>
-                                <li><span>Begin Date:</span>@Pro.BeginDate.ToShortDateString()</a></li>
-                                <li><span>End Date:</span> @Pro.EndDate.ToShortDateString()</a></li>
+                                <li><span>Begin Date:</span>@Pro.BeginDate.ToShortDateString()</li>
+                                <li><span>End Date:</span> @Pro.EndDate.ToShortDateString()</li>
                             </ul>
                         </div>
+                        <br />
+                        <h6>Donated Amount: @raised.ToString("#,##0")</h6>
+                        <h6>Number of Members donate: @listDonationRecord.Sum(x => x.MemberId).ToString("#,##0")</h6>
                         <h3>Informations</h3>
                         <p>@Pro.Information</p>
                     </div>
-                    <div class="article-content causes-details-two">
-                        <div class="payment-method">
-                            <h3>Select Payment Method</h3>
-                            <p>
-                                <input type="radio" id="paypal" name="radio-group">
-                                <label for="paypal">PayPal</label>
-                            </p>
-                            <p>
-                                <input type="radio" id="credit" name="radio-group">
-                                <label for="credit">Credit Card</label>
-                            </p>
-                            <p>
-                                <input type="radio" id="debit" name="radio-group">
-                                <label for="debit">Debit Card</label>
-                            </p>
-                            <p>
-                                <input type="radio" id="others" name="radio-group">
-                                <label for="others">others</label>
-                            </p>
+
+                    @if (member != null)
+                    {
+                        <div class="donates-wraps">
+                            <div id="smart-button-container">
+                                <div style="text-align: center"><label for="description">Nội dung: </label><input type="text" name="descriptionInput" id="description" maxlength="127" value=""></div>
+                                <p id="descriptionError" style="visibility: hidden; color:red; text-align: center;">Please enter a description</p>
+                                <div style="text-align: center"><label for="amount">Số tiền quyên góp: </label><input name="amountInput" type="number" id="amount" value=""><span> USD</span></div>
+                                <p id="priceLabelError" style="visibility: hidden; color:red; text-align: center;">Please enter a price</p>
+                                <div id="invoiceidDiv" style="text-align: center; display: none;"><label for="invoiceid"> </label><input name="invoiceid" maxlength="127" type="text" id="invoiceid" value=""></div>
+                                <p id="invoiceidError" style="visibility: hidden; color:red; text-align: center;">Please enter an Invoice ID</p>
+                                <div style="text-align: center; margin-top: 0.625rem;" id="paypal-button-container"></div>
+                            </div>
+                            <script src="https://www.paypal.com/sdk/js?client-id=AQVkbrvV36q8ISQ2RteBsEzwY3w-xtomu60brAZ8uVqSS6IUouNVHqLUigCYksdKjEiMYtnLte74i0F0&currency=USD" data-sdk-integration-source="button-factory"></script>
+                            <script>
+                                function initPayPalButton() {
+                                    var description = document.querySelector('#smart-button-container #description');
+                                    var amount = document.querySelector('#smart-button-container #amount');
+                                    var descriptionError = document.querySelector('#smart-button-container #descriptionError');
+                                    var priceError = document.querySelector('#smart-button-container #priceLabelError');
+                                    var invoiceid = document.querySelector('#smart-button-container #invoiceid');
+                                    var invoiceidError = document.querySelector('#smart-button-container #invoiceidError');
+                                    var invoiceidDiv = document.querySelector('#smart-button-container #invoiceidDiv');
+
+                                    var elArr = [description, amount];
+
+                                    if (invoiceidDiv.firstChild.innerHTML.length > 1) {
+                                        invoiceidDiv.style.display = "block";
+                                    }
+
+                                    var purchase_units = [];
+                                    purchase_units[0] = {};
+                                    purchase_units[0].amount = {};
+
+                                    function validate(event) {
+                                        return event.value.length > 0;
+                                    }
+
+                                    paypal.Buttons({
+                                        style: {
+                                            color: 'blue',
+                                            shape: 'pill',
+                                            label: 'paypal',
+                                            layout: 'horizontal',
+
+                                        },
+
+                                        onInit: function (data, actions) {
+                                            actions.disable();
+
+                                            if (invoiceidDiv.style.display === "block") {
+                                                elArr.push(invoiceid);
+                                            }
+
+                                            elArr.forEach(function (item) {
+                                                item.addEventListener('keyup', function (event) {
+                                                    var result = elArr.every(validate);
+                                                    if (result) {
+                                                        actions.enable();
+                                                    } else {
+                                                        actions.disable();
+                                                    }
+                                                });
+                                            });
+                                        },
+
+                                        onClick: function () {
+                                            if (description.value.length < 1) {
+                                                descriptionError.style.visibility = "visible";
+                                            } else {
+                                                descriptionError.style.visibility = "hidden";
+                                            }
+
+                                            if (amount.value.length < 1) {
+                                                priceError.style.visibility = "visible";
+                                            } else {
+                                                priceError.style.visibility = "hidden";
+                                            }
+
+                                            if (invoiceid.value.length < 1 && invoiceidDiv.style.display === "block") {
+                                                invoiceidError.style.visibility = "visible";
+                                            } else {
+                                                invoiceidError.style.visibility = "hidden";
+                                            }
+
+                                            purchase_units[0].description = description.value;
+                                            purchase_units[0].amount.value = amount.value;
+
+                                            if (invoiceid.value !== '') {
+                                                purchase_units[0].invoice_id = invoiceid.value;
+                                            }
+                                        },
+
+                                        createOrder: function (data, actions) {
+                                            return actions.order.create({
+                                                purchase_units: purchase_units,
+                                            });
+                                        },
+
+                                        onApprove: function (data, actions) {
+                                            return actions.order.capture().then(function (details) {
+                                                alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                                            });
+                                        },
+
+                                        onError: function (err) {
+                                            console.log(err);
+                                        }
+                                    }).render('#paypal-button-container');
+                                }
+                                initPayPalButton();
+                            </script>
                         </div>
-                        <div class="contact-form">
-                            <form id="contactForm">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <input type="text" name="name" id="first-name" class="form-control" placeholder="First Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <input type="text" name="name" id="last-name" class="form-control" placeholder="Last Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <input type="email" name="email" id="email" class="form-control" placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Phone">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <input type="text" name="msg_subject" id="msg_subject" class="form-control" placeholder="$100.00">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <button type="submit" class="default-btn">Donate Now</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <a href="~/login" class="alert alert-info">You need to login/register to donate</a>
+                    }
+
+
                     <div class="article-footer causes-icon">
                         <div class="article-tags">
                             <span><i class="fa fa-share"></i></span>
