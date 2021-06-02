@@ -6,18 +6,7 @@
     {
         ViewBag.MEMBER = JsonConvert.DeserializeObject(Context.Session.GetString("MEMBER"));
     }
-    else
-    {
-        @section scripts {
-            <script>
-                $(function () {
-                    if (confirm(@TempData["confirm"])) {
-                        @{ Context.Response.Redirect("~/login"); }
-                    }
-                })
-            </script>
-        }
-    }
+
 }
 
 <!doctype html>
@@ -48,7 +37,18 @@
 
         Html.RenderPartial("~/Views/LayoutMain/_PartnerPartial.cshtml"); }
     @RenderBody()
-
+    <div class="modal" tabindex="-1" id="form-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
     @{ Html.RenderPartial("~/Views/LayoutMain/_FooterEmailAreaPartial.cshtml");
 
         Html.RenderPartial("~/Views/LayoutMain/_FooterAreaPartial.cshtml"); }
@@ -69,7 +69,6 @@
     <script src="~/assets/js/custom.js"></script>
     <script src="~/js/notify.min.js"></script>
     <script src="~/js/site.js"></script>
-
 </body>
 
 <!-- Mirrored from templates.envytheme.com/nivo/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 May 2021 01:31:18 GMT -->
