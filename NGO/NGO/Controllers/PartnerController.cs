@@ -70,7 +70,7 @@ namespace NGO.Controllers
                     fileName = Path.GetFileNameWithoutExtension(partner.ImageFile.FileName);
                     string extension = Path.GetExtension(partner.ImageFile.FileName);
                     partner.LogoImage = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    path = Path.Combine(wwwRootPath + "/images/partner", fileName);
+                    path = Path.Combine(wwwRootPath + "/assetsAdmin/images/partners", fileName);
                 }
                 if (id == 0)
                 {
@@ -122,6 +122,7 @@ namespace NGO.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var Partner = await _context.Partners.FindAsync(id);
+            DeleteImage(Partner);
             _context.Partners.Remove(Partner);
             await _context.SaveChangesAsync();
             return Json(new { html = Helper.RenderRazorViewString(this, "_ViewAll", _context.Partners.ToList()) });
@@ -130,6 +131,15 @@ namespace NGO.Controllers
         private bool PartnerExists(int id)
         {
             return _context.Partners.Any(e => e.Id == id);
+        }
+
+        public void DeleteImage(Partner p)
+        {
+            if (p.Id != 0)
+            {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                System.IO.File.Delete(wwwRootPath + "/assetsAdmin/images/partners/" + p.LogoImage);
+            }
         }
     }
 }

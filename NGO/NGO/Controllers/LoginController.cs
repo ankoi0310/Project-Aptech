@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NGO.Models;
+using NGO.Models.MappingClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,13 +39,8 @@ namespace NGO.Controllers
                     }
                     return RedirectToAction("Index", "Main");
                 }
-                else
-                {
-                    ViewBag.MEMBER = null;
-                }
             }
-
-            return RedirectToAction("Index", "Login", ViewBag.MEMBER = null);
+            return RedirectToAction("Index", "Login");
         }
 
         public IActionResult Logout()

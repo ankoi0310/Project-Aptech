@@ -67,33 +67,33 @@
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav m-auto">
                                 <li class="nav-item">
-                                    <a href="index" class="nav-link active">Home</a>
+                                    <a href="~/main/index" class="nav-link active">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="AboutUs" class="nav-link">About</a>
+                                    <a href="~/main/aboutus" class="nav-link">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="EventDetail" class="nav-link">Event</a>
+                                    <a href="~/main/eventdetail" class="nav-link">Event(Query)</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle">Project</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="ListProject" class="nav-link">Project</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="ProjectDetail" class="nav-link">Project Details</a>
-                                        </li>
-                                    </ul>
+                                    <a href="~/main/listprogram" class="nav-link">Program</a>
+                                </li>
+                                @*<li class="nav-item">
+                        <a href="#" class="nav-link dropdown-toggle">Project</a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a href="ListProject" class="nav-link">Project</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="ProjectDetail" class="nav-link">Project Details</a>
+                            </li>
+                        </ul>
+                    </li>*@
+                                <li class="nav-item">
+                                    <a href="~/main/contact" class="nav-link">Contact</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="Causes" class="nav-link">Causes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="Contact" class="nav-link">Contact</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="Information" class="nav-link">Information</a>
+                                    <a href="~/main/information" onclick="return checkLogin();" class="nav-link">Information</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="Transaction" class="nav-link">Transaction</a>
@@ -115,7 +115,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="Donation" class="donate">Donate Now</a>
+                                <a href="~/main/donation" class="donate">Donate Now</a>
                             </div>
                         </div>
                     </div>
@@ -124,13 +124,13 @@
                             margin-right: 10px
                         }
 
-                        #login, #logout {
+                        #login, #logout, #register {
                             font-size: 15px;
                             font-weight: 600;
                             border-radius: 10px;
                             color: #0094ff;
                             padding: 4px 25px;
-                            margin: 0 auto 0 0;
+                            margin: 0 25px 0 0;
                             border: 2px solid #0094ff;
                             transition: all 0.5s;
                         }
@@ -142,6 +142,8 @@
                                 border: 2px solid #1123B7;
                             }
                     </style>
+                    <a href="~/register" id="login">Register</a>
+
                     @if (ViewBag.MEMBER != null)
                     {
                         <ul id="user" class="list-group">
