@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using NGO.Models;
 using NGO.Models.MappingClass;
@@ -7,8 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using NGO.Models.MappingClass;
-using Newtonsoft.Json;
 
 namespace NGO.Controllers
 {
@@ -35,6 +34,24 @@ namespace NGO.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> Update([Bind("Id,Name,Phone,Email,BankAccount,BankName,Username,Password,MemberTypeId,Active")] Member member)
+        {
+            if (ModelState.IsValid)
+            {
+                Member oldMember = await _context.Members.FindAsync(member.Id);
+                oldMember.Name = member.Name ?? oldMember.Name; 
+                oldMember.Phone = member.Phone ?? oldMember.Phone; 
+                oldMember.Email = member.Email ?? oldMember.Email; 
+                oldMember.BankAccount = member.BankAccount ?? oldMember.BankAccount; 
+                oldMember.BankName = member.BankName ?? oldMember.BankName;
+                HttpContext.Session.SetString("MEMBER", JsonConvert.SerializeObject(oldMember));
+                _context.Update(oldMember);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("information");
+        }
+
 
         public IActionResult ListProgram(int id)
         {
@@ -99,6 +116,11 @@ namespace NGO.Controllers
 
         public IActionResult Information()
         {
+            if (HttpContext.Session.GetString("MEMBER") != null)
+            {
+                Member member = JsonConvert.DeserializeObject<Member>(HttpContext.Session.GetString("MEMBER"));
+                return View(member);
+            }
             return View();
         }
     }
