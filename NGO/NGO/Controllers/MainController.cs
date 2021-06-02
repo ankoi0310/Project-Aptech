@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NGO.Models.MappingClass;
+using Newtonsoft.Json;
 
 namespace NGO.Controllers
 {
@@ -34,13 +36,22 @@ namespace NGO.Controllers
             return View();
         }
 
-        public IActionResult ListProgram()
+        public IActionResult ListProgram(int id)
         {
             var now = DateTime.Now;
-            var listPro = _context.Programs.ToList();
-            var listTopPro = _context.Programs.Where(x=> DateTime.Compare(x.BeginDate,now)<=0 && DateTime.Compare(x.EndDate, now)>=0)
+            List<NGO.Models.MappingClass.Program> listPro = new List<NGO.Models.MappingClass.Program>();
+            if (id == 0)
+            {
+                listPro = _context.Programs.ToList();
+            }
+            else
+            {
+                listPro = _context.Programs.Where(x => x.DonationCategoryId == id).ToList();
+            }
+
+            var listTopPro = _context.Programs.Where(x => DateTime.Compare(x.BeginDate, now) <= 0 && DateTime.Compare(x.EndDate, now) >= 0)
                 .OrderByDescending(x => x.NeedAmount).ToList();
-           
+
             if (listTopPro.Count >= 5)
             {
                 listTopPro = listTopPro.Take(5).ToList();
@@ -59,11 +70,20 @@ namespace NGO.Controllers
         {
             Models.MappingClass.Program pro = _context.Programs.Find(Id);
             ViewBag.Program = pro;
-            var listDonationRecord = _context.DonationRecords.Where(x=>x.ProgramId == Id).ToList();
+            var listDonationRecord = _context.DonationRecords.Where(x => x.ProgramId == Id).ToList();
             ViewBag.ListDonationRecord = listDonationRecord;
             var listImage = _context.ProgramImages.ToList();
             ViewBag.listImage = listImage;
+            var listPayment = _context.PaymentTypes.ToList();
+            ViewBag.listPayment = listPayment;
             var listDonationCate = _context.DonationCategories.ToList();
+
+            var memberString = HttpContext.Session.GetString("MEMBER");
+
+            if (memberString != null)
+            {
+                ViewBag.Member = JsonConvert.DeserializeObject<Member>(memberString);
+            }
             return View();
         }
 
