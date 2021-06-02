@@ -23,7 +23,7 @@ namespace NGO.Controllers
             return View();
         }
 
-        public IActionResult CauseDetail()
+        public IActionResult ProjectDetail()
         {
             return View();
         }
@@ -33,6 +33,22 @@ namespace NGO.Controllers
             return View();
         }
         public IActionResult Contact()
+        {
+            return View();
+        }
+        public IActionResult Information()
+        {
+            return View();
+        }
+        public IActionResult ListProject()
+        {
+            return View();
+        }
+        public IActionResult Causes()
+        {
+            return View();
+        }
+        public IActionResult Transaction()
         {
             return View();
         }

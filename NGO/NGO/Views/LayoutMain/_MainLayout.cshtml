@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using Newtonsoft.Json
+@using Microsoft.AspNetCore.Session
 
 @{
     if (Context.Session.GetString("MEMBER") != null)
@@ -35,6 +36,7 @@
         Html.RenderPartial("~/Views/LayoutMain/_SomeStoryPartial.cshtml");
 
         Html.RenderPartial("~/Views/LayoutMain/_PartnerPartial.cshtml"); }
+
     @RenderBody()
 
     @{ Html.RenderPartial("~/Views/LayoutMain/_FooterEmailAreaPartial.cshtml");
