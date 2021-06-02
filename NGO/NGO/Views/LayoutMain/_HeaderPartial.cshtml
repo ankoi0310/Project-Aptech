@@ -79,21 +79,21 @@
                                     <a href="~/main/listprogram" class="nav-link">Program</a>
                                 </li>
                                 @*<li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle">Project</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="ListProject" class="nav-link">Project</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="ProjectDetail" class="nav-link">Project Details</a>
-                                        </li>
-                                    </ul>
-                                </li>*@
+                        <a href="#" class="nav-link dropdown-toggle">Project</a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a href="ListProject" class="nav-link">Project</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="ProjectDetail" class="nav-link">Project Details</a>
+                            </li>
+                        </ul>
+                    </li>*@
                                 <li class="nav-item">
                                     <a href="~/main/contact" class="nav-link">Contact</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="~/main/information" class="nav-link">Information</a>
+                                    <a href="~/main/information" onclick="return checkLogin();" class="nav-link">Information</a>
                                 </li>
 
                             </ul>
@@ -121,13 +121,13 @@
                             margin-right: 10px
                         }
 
-                        #login, #logout {
+                        #login, #logout, #register {
                             font-size: 15px;
                             font-weight: 600;
                             border-radius: 10px;
                             color: #0094ff;
                             padding: 4px 25px;
-                            margin: 0 auto 0 0;
+                            margin: 0 25px 0 0;
                             border: 2px solid #0094ff;
                             transition: all 0.5s;
                         }
@@ -150,6 +150,7 @@
                     {
                         <a href="~/login" id="login">Login &nbsp;<i class="fa fa-sign-in"></i></a>
                     }
+                <a onclick="showInPopup('@Url.Action("AddOrEdit", "Member", new NGO.Models.MappingClass.Member { MemberTypeId = 2, Active = true }, Context.Request.Scheme)', 'New Member')" id="register" class="btn btn-success text-white">Register</a>
                 </nav>
             </div>
         </div>
