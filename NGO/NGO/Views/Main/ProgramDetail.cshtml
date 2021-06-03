@@ -33,6 +33,8 @@
     member = ViewBag.Member;
     var raised = listDonationRecord.Sum(x => x.Amount);
     var progressRate = (raised / Pro.NeedAmount).ToString("0%"); ;
+    string mess = null;
+    mess = TempData["Mess"] as string;
 }
 
 <div class="page-title-area item-bg-5">
@@ -94,115 +96,47 @@
 
                     @if (member != null)
                     {
-                        <div class="donates-wraps">
-                            <div id="smart-button-container">
-                                <div style="text-align: center"><label for="description">Nội dung: </label><input type="text" name="descriptionInput" id="description" maxlength="127" value=""></div>
-                                <p id="descriptionError" style="visibility: hidden; color:red; text-align: center;">Please enter a description</p>
-                                <div style="text-align: center"><label for="amount">Số tiền quyên góp: </label><input name="amountInput" type="number" id="amount" value=""><span> USD</span></div>
-                                <p id="priceLabelError" style="visibility: hidden; color:red; text-align: center;">Please enter a price</p>
-                                <div id="invoiceidDiv" style="text-align: center; display: none;"><label for="invoiceid"> </label><input name="invoiceid" maxlength="127" type="text" id="invoiceid" value=""></div>
-                                <p id="invoiceidError" style="visibility: hidden; color:red; text-align: center;">Please enter an Invoice ID</p>
-                                <div style="text-align: center; margin-top: 0.625rem;" id="paypal-button-container"></div>
-                            </div>
-                            <script src="https://www.paypal.com/sdk/js?client-id=AQVkbrvV36q8ISQ2RteBsEzwY3w-xtomu60brAZ8uVqSS6IUouNVHqLUigCYksdKjEiMYtnLte74i0F0&currency=USD" data-sdk-integration-source="button-factory"></script>
-                            <script>
-                                function initPayPalButton() {
-                                    var description = document.querySelector('#smart-button-container #description');
-                                    var amount = document.querySelector('#smart-button-container #amount');
-                                    var descriptionError = document.querySelector('#smart-button-container #descriptionError');
-                                    var priceError = document.querySelector('#smart-button-container #priceLabelError');
-                                    var invoiceid = document.querySelector('#smart-button-container #invoiceid');
-                                    var invoiceidError = document.querySelector('#smart-button-container #invoiceidError');
-                                    var invoiceidDiv = document.querySelector('#smart-button-container #invoiceidDiv');
-
-                                    var elArr = [description, amount];
-
-                                    if (invoiceidDiv.firstChild.innerHTML.length > 1) {
-                                        invoiceidDiv.style.display = "block";
-                                    }
-
-                                    var purchase_units = [];
-                                    purchase_units[0] = {};
-                                    purchase_units[0].amount = {};
-
-                                    function validate(event) {
-                                        return event.value.length > 0;
-                                    }
-
-                                    paypal.Buttons({
-                                        style: {
-                                            color: 'blue',
-                                            shape: 'pill',
-                                            label: 'paypal',
-                                            layout: 'horizontal',
-
-                                        },
-
-                                        onInit: function (data, actions) {
-                                            actions.disable();
-
-                                            if (invoiceidDiv.style.display === "block") {
-                                                elArr.push(invoiceid);
+                        <div class="article-content causes-details-two">
+                            <div class="contact-form">
+                                <form action="@Url.Action("MakeDonation", "Main")" method="post">
+                                    <div class="row">
+                                        <div class="payment-method">
+                                            <h3>Select Payment Method</h3>
+                                            @foreach (var item in listPayment)
+                                            {
+                                                <p>
+                                                    <input type="radio" id="@item.Name" name="radio-group" value="@item.Id">
+                                                    <label for="@item.Name">@item.Name</label>
+                                                </p>
                                             }
+                                        </div>
+                                        <input type="hidden" name="MemberId" id="MemberId" class="form-control" value="@member.Id">
+                                        <input type="hidden" name="ProgramId" id="ProgramId" class="form-control" value="@Pro.Id">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <input type="text" name="Amount" id="Amount" class="form-control" placeholder="$1.00">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <input type="text" name="Descriptions" id="Descriptions" class="form-control" placeholder="Descriptions">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <button type="submit" class="default-btn">Donate Now</button>
+                                        </div>
 
-                                            elArr.forEach(function (item) {
-                                                item.addEventListener('keyup', function (event) {
-                                                    var result = elArr.every(validate);
-                                                    if (result) {
-                                                        actions.enable();
-                                                    } else {
-                                                        actions.disable();
-                                                    }
-                                                });
-                                            });
-                                        },
+                                    </div>
 
-                                        onClick: function () {
-                                            if (description.value.length < 1) {
-                                                descriptionError.style.visibility = "visible";
-                                            } else {
-                                                descriptionError.style.visibility = "hidden";
-                                            }
-
-                                            if (amount.value.length < 1) {
-                                                priceError.style.visibility = "visible";
-                                            } else {
-                                                priceError.style.visibility = "hidden";
-                                            }
-
-                                            if (invoiceid.value.length < 1 && invoiceidDiv.style.display === "block") {
-                                                invoiceidError.style.visibility = "visible";
-                                            } else {
-                                                invoiceidError.style.visibility = "hidden";
-                                            }
-
-                                            purchase_units[0].description = description.value;
-                                            purchase_units[0].amount.value = amount.value;
-
-                                            if (invoiceid.value !== '') {
-                                                purchase_units[0].invoice_id = invoiceid.value;
-                                            }
-                                        },
-
-                                        createOrder: function (data, actions) {
-                                            return actions.order.create({
-                                                purchase_units: purchase_units,
-                                            });
-                                        },
-
-                                        onApprove: function (data, actions) {
-                                            return actions.order.capture().then(function (details) {
-                                                alert('Transaction completed by ' + details.payer.name.given_name + '!');
-                                            });
-                                        },
-
-                                        onError: function (err) {
-                                            console.log(err);
-                                        }
-                                    }).render('#paypal-button-container');
+                                </form>
+                                @if (!string.IsNullOrEmpty(mess))
+                                {
+                                    <div class="alert alert-warning text-center" role="alert">
+                                        @mess
+                                    </div>
                                 }
-                                initPayPalButton();
-                            </script>
+                            </div>
+
                         </div>
                     }
                     else

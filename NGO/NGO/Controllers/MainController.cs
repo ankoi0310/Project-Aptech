@@ -104,6 +104,35 @@ namespace NGO.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult MakeDonation(DonationRecord donationRecord)
+        {
+            try
+            {
+                donationRecord.PaymentTypeId = int.Parse(Request.Form["radio-group"]);
+                donationRecord.Date = DateTime.Now;
+                donationRecord.Active = true;
+                _context.DonationRecords.Add(donationRecord);
+                var result = _context.SaveChanges();
+                if (result > 0)
+                {
+                    TempData["Mess"] = "Your donation is made successful";
+                    return RedirectToAction("transaction", new { id = donationRecord.MemberId });
+                }
+                else
+                {
+                    TempData["Mess"] = "Your form is filled incorrectly";
+                    return RedirectToAction("ProgramDetail", new { id = donationRecord.ProgramId });
+                }
+            }
+            catch (Exception)
+            {
+                TempData["Mess"] = "Your form should have filled out"; ;
+                return RedirectToAction("ProgramDetail", new { id = donationRecord.ProgramId });
+            }
+
+        }
+
         public IActionResult EventDetail()
         {
             return View();
@@ -121,6 +150,22 @@ namespace NGO.Controllers
                 Member member = JsonConvert.DeserializeObject<Member>(HttpContext.Session.GetString("MEMBER"));
                 return View(member);
             }
+            return View();
+        }
+
+        public IActionResult Transaction(int id)
+        {
+            var listTransaction = _context.DonationRecords.Where(x => x.MemberId == id).ToList();
+            ViewBag.listTransaction = listTransaction;
+
+            string memberString = HttpContext.Session.GetString("MEMBER");
+
+            if (memberString != null)
+            {
+                ViewBag.Member = JsonConvert.DeserializeObject<Member>(memberString);
+            }
+            var program = _context.Programs.ToList();
+            var payment = _context.PaymentTypes.ToList();
             return View();
         }
     }

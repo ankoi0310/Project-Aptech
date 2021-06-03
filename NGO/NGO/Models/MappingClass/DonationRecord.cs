@@ -13,7 +13,7 @@ namespace NGO.Models.MappingClass
         public int Id { get; set; }
 
         [Column("PartnerId", TypeName = "int")]
-        public int PartnerId { get; set; }
+        public int? PartnerId { get; set; }
         [ForeignKey("PartnerId")]
         public Partner Partner { get; set; }
 
